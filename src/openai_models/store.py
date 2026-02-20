@@ -103,17 +103,25 @@ class ModelStore:
 
         import aiosqlite
 
-        async with aiosqlite.connect(self._db_path) as db:
-            await db.execute(
-                """
-                CREATE TABLE IF NOT EXISTS models (
-                    id TEXT PRIMARY KEY,
-                    data TEXT NOT NULL,
-                    updated_at TEXT NOT NULL
+        try:
+            async with aiosqlite.connect(self._db_path) as db:
+                await db.execute(
+                    """
+                    CREATE TABLE IF NOT EXISTS models (
+                        id TEXT PRIMARY KEY,
+                        data TEXT NOT NULL,
+                        updated_at TEXT NOT NULL
+                    )
+                    """
                 )
-                """
+                await db.commit()
+        except Exception:
+            await logger.awarning(
+                "failed_to_init_db, falling back to in-memory only",
+                db_path=str(self._db_path),
+                exc_info=True,
             )
-            await db.commit()
+            self._db_path = None
 
     async def load_from_db(self) -> bool:
         """Load cached model data from SQLite. Returns True if data was loaded."""

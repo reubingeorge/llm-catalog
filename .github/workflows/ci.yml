@@ -46,7 +46,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Create env file
-        run: echo "OPENAI_API_KEY=sk-test-ci" > .env
+        run: |
+          echo "OPENAI_API_KEY=sk-test-ci" > .env
+          echo "DB_PATH=" >> .env
       - name: Build image
         run: docker compose build
       - name: Start services
