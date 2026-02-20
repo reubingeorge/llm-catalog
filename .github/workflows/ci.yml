@@ -49,6 +49,7 @@ jobs:
         run: |
           echo "OPENAI_API_KEY=sk-test-ci" > .env
           echo "DB_PATH=" >> .env
+          echo "PORT=8000" >> .env
       - name: Build image
         run: docker compose build
       - name: Start services
