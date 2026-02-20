@@ -39,12 +39,9 @@ ENV PATH="/app/.venv/bin:$PATH"
 HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
-CMD ["gunicorn", "openai_models.app:create_app", \
+CMD ["uvicorn", "openai_models.app:create_app", \
      "--factory", \
-     "--worker-class", "uvicorn.workers.UvicornWorker", \
+     "--host", "0.0.0.0", \
+     "--port", "8000", \
      "--workers", "2", \
-     "--bind", "0.0.0.0:8000", \
-     "--keep-alive", "120", \
-     "--timeout", "60", \
-     "--graceful-timeout", "10", \
-     "--access-logfile", "-"]
+     "--loop", "uvloop"]
