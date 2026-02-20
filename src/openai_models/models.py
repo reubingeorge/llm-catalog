@@ -58,6 +58,7 @@ class OpenAIModel(BaseModel):
     id: str
     name: str = ""
     family: str = ""
+    provider: str = "openai"
     description: str = ""
     context_window: int | None = None
     max_output_tokens: int | None = None
@@ -86,6 +87,7 @@ class ModelFilterParams(BaseModel):
     distillation: bool | None = None
     predicted_outputs: bool | None = None
     family: str | None = None
+    provider: str | None = None
     include_deprecated: bool = False
     min_context: int | None = None
     max_input_price: float | None = None

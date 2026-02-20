@@ -31,6 +31,7 @@ class ModelSnapshot:
     models_list: list[OpenAIModel] = field(default_factory=list)
     non_deprecated: list[OpenAIModel] = field(default_factory=list)
     by_family: dict[str, list[OpenAIModel]] = field(default_factory=dict)
+    by_provider: dict[str, list[OpenAIModel]] = field(default_factory=dict)
     last_refreshed: datetime = field(default_factory=lambda: datetime.now(tz=UTC))
 
 
@@ -80,19 +81,22 @@ class ModelStore:
     def _build_snapshot(models: list[OpenAIModel]) -> ModelSnapshot:
         """Build a new immutable snapshot with pre-computed indexes."""
         models_dict: dict[str, OpenAIModel] = {m.id: m for m in models}
-        models_list = sorted(models, key=lambda m: m.name or m.id)
+        models_list = sorted(models, key=lambda m: (m.name or m.id).lower())
         non_deprecated = [m for m in models_list if not m.deprecated]
 
         by_family: dict[str, list[OpenAIModel]] = defaultdict(list)
+        by_provider: dict[str, list[OpenAIModel]] = defaultdict(list)
         for m in models_list:
             if m.family:
                 by_family[m.family].append(m)
+            by_provider[m.provider].append(m)
 
         return ModelSnapshot(
             models=models_dict,
             models_list=models_list,
             non_deprecated=non_deprecated,
             by_family=dict(by_family),
+            by_provider=dict(by_provider),
             last_refreshed=datetime.now(tz=UTC),
         )
 

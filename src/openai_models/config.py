@@ -21,6 +21,8 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
     openai_api_key: str = Field(default="", description="OpenAI API key")
+    anthropic_api_key: str = Field(default="", description="Anthropic API key")
+    gemini_api_key: str = Field(default="", description="Google Gemini API key")
     app_env: Environment = Field(default=Environment.PRODUCTION)
     app_host: str = Field(default="0.0.0.0")  # noqa: S104
     app_port: int = Field(default=8000)

@@ -21,8 +21,8 @@ class TestHealthRoute:
         """Health reports correct model count from store."""
         resp = await client.get("/health")
         data = resp.json()
-        # Our test store has 10 models
-        assert data["models_loaded"] == 10
+        # Our test store has 14 models (10 OpenAI + 2 Anthropic + 2 Gemini)
+        assert data["models_loaded"] == 14
 
     async def test_health_uptime(self, client: httpx.AsyncClient) -> None:
         """Uptime is a positive number."""

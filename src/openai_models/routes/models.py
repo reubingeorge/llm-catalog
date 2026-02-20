@@ -30,6 +30,7 @@ def _get_filter_params(
     distillation: bool | None = Query(default=None),
     predicted_outputs: bool | None = Query(default=None),
     family: str | None = Query(default=None),
+    provider: str | None = Query(default=None),
     include_deprecated: bool = Query(default=False),
     min_context: int | None = Query(default=None),
     max_input_price: float | None = Query(default=None),
@@ -51,6 +52,7 @@ def _get_filter_params(
         distillation=distillation,
         predicted_outputs=predicted_outputs,
         family=family,
+        provider=provider,
         include_deprecated=include_deprecated,
         min_context=min_context,
         max_input_price=max_input_price,
@@ -107,6 +109,10 @@ async def list_models(
     if params.family:
         models = [m for m in models if m.family == params.family]
 
+    # Apply provider filter
+    if params.provider:
+        models = [m for m in models if m.provider == params.provider]
+
     # Apply numeric filters
     if params.min_context is not None:
         models = [
@@ -135,7 +141,11 @@ async def list_models(
     if params.q:
         q_lower = params.q.lower()
         models = [
-            m for m in models if q_lower in m.id.lower() or q_lower in m.name.lower()
+            m
+            for m in models
+            if q_lower in m.id.lower()
+            or q_lower in m.name.lower()
+            or q_lower in m.provider.lower()
         ]
 
     # Apply sorting

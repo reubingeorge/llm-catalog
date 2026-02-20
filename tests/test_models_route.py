@@ -202,6 +202,58 @@ class TestListModels:
         resp = await client.get("/models")
         assert "x-response-time" in resp.headers
 
+    # Provider filter tests
+    async def test_filter_provider_openai(self, client: httpx.AsyncClient) -> None:
+        """provider=openai returns only OpenAI models."""
+        resp = await client.get("/models?provider=openai")
+        data = resp.json()
+        assert data["count"] > 0
+        for m in data["models"]:
+            assert m["provider"] == "openai"
+
+    async def test_filter_provider_anthropic(self, client: httpx.AsyncClient) -> None:
+        """provider=anthropic returns only Claude models."""
+        resp = await client.get("/models?provider=anthropic")
+        data = resp.json()
+        assert data["count"] > 0
+        for m in data["models"]:
+            assert m["provider"] == "anthropic"
+
+    async def test_filter_provider_google(self, client: httpx.AsyncClient) -> None:
+        """provider=google returns only Gemini models."""
+        resp = await client.get("/models?provider=google")
+        data = resp.json()
+        assert data["count"] > 0
+        for m in data["models"]:
+            assert m["provider"] == "google"
+
+    async def test_filter_provider_with_capability(
+        self, client: httpx.AsyncClient
+    ) -> None:
+        """Provider + capability filter combines correctly."""
+        resp = await client.get("/models?provider=anthropic&vision=true")
+        data = resp.json()
+        assert data["count"] > 0
+        for m in data["models"]:
+            assert m["provider"] == "anthropic"
+            assert m["capabilities"]["vision"] is True
+
+    async def test_search_q_matches_provider(self, client: httpx.AsyncClient) -> None:
+        """Free-text search matches on provider name."""
+        resp = await client.get("/models?q=anthropic")
+        data = resp.json()
+        assert data["count"] > 0
+        for m in data["models"]:
+            assert m["provider"] == "anthropic"
+
+    async def test_all_models_have_provider(self, client: httpx.AsyncClient) -> None:
+        """Every model in the response has a provider field."""
+        resp = await client.get("/models?include_deprecated=true")
+        data = resp.json()
+        for m in data["models"]:
+            assert "provider" in m
+            assert m["provider"] in {"openai", "anthropic", "google"}
+
 
 class TestGetModel:
     """Tests for GET /models/{model_id}."""
@@ -214,9 +266,26 @@ class TestGetModel:
         assert data["id"] == "gpt-5.2"
         assert data["name"] == "GPT-5.2"
         assert data["family"] == "gpt-5.2"
+        assert data["provider"] == "openai"
         assert data["context_window"] == 400000
 
     async def test_get_nonexistent_model(self, client: httpx.AsyncClient) -> None:
         """Returns 404 for unknown model ID."""
         resp = await client.get("/models/nonexistent")
         assert resp.status_code == 404
+
+    async def test_get_claude_model(self, client: httpx.AsyncClient) -> None:
+        """Returns Claude model data."""
+        resp = await client.get("/models/claude-sonnet-4-5-20250929")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["provider"] == "anthropic"
+        assert data["family"] == "claude-sonnet"
+
+    async def test_get_gemini_model(self, client: httpx.AsyncClient) -> None:
+        """Returns Gemini model data."""
+        resp = await client.get("/models/gemini-2.5-pro")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["provider"] == "google"
+        assert data["family"] == "gemini-2.5"

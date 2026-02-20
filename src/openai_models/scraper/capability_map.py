@@ -15,6 +15,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5.2": {
         "name": "GPT-5.2",
         "family": "gpt-5.2",
+        "provider": "openai",
         "context_window": 400_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -34,6 +35,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5.2-pro": {
         "name": "GPT-5.2 Pro",
         "family": "gpt-5.2",
+        "provider": "openai",
         "context_window": 400_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -52,6 +54,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5.2-chat": {
         "name": "GPT-5.2 Chat",
         "family": "gpt-5.2",
+        "provider": "openai",
         "context_window": 128_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -69,6 +72,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5.2-codex": {
         "name": "GPT-5.2 Codex",
         "family": "gpt-5.2",
+        "provider": "openai",
         "context_window": 400_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -87,6 +91,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5.1": {
         "name": "GPT-5.1",
         "family": "gpt-5.1",
+        "provider": "openai",
         "context_window": 400_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -104,6 +109,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5.1-codex": {
         "name": "GPT-5.1 Codex",
         "family": "gpt-5.1",
+        "provider": "openai",
         "context_window": 400_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -121,6 +127,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5.1-codex-mini": {
         "name": "GPT-5.1 Codex Mini",
         "family": "gpt-5.1",
+        "provider": "openai",
         "context_window": 400_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -138,6 +145,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5.1-codex-max": {
         "name": "GPT-5.1 Codex Max",
         "family": "gpt-5.1",
+        "provider": "openai",
         "context_window": 400_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -155,6 +163,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5.1-chat": {
         "name": "GPT-5.1 Chat",
         "family": "gpt-5.1",
+        "provider": "openai",
         "context_window": 128_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -173,6 +182,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5": {
         "name": "GPT-5",
         "family": "gpt-5",
+        "provider": "openai",
         "context_window": 400_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -191,6 +201,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5-mini": {
         "name": "GPT-5 Mini",
         "family": "gpt-5",
+        "provider": "openai",
         "context_window": 400_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -208,6 +219,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5-nano": {
         "name": "GPT-5 Nano",
         "family": "gpt-5",
+        "provider": "openai",
         "context_window": 400_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -225,6 +237,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5-pro": {
         "name": "GPT-5 Pro",
         "family": "gpt-5",
+        "provider": "openai",
         "context_window": 400_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -242,6 +255,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5-chat": {
         "name": "GPT-5 Chat",
         "family": "gpt-5",
+        "provider": "openai",
         "context_window": 128_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -259,6 +273,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-5-codex": {
         "name": "GPT-5 Codex",
         "family": "gpt-5",
+        "provider": "openai",
         "context_window": 400_000,
         "max_output_tokens": 128_000,
         "pricing": ModelPricing(
@@ -277,6 +292,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-4.1": {
         "name": "GPT-4.1",
         "family": "gpt-4.1",
+        "provider": "openai",
         "context_window": 1_048_000,
         "max_output_tokens": 32_000,
         "pricing": ModelPricing(
@@ -295,6 +311,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-4.1-mini": {
         "name": "GPT-4.1 Mini",
         "family": "gpt-4.1",
+        "provider": "openai",
         "context_window": 1_048_000,
         "max_output_tokens": 32_000,
         "pricing": ModelPricing(
@@ -313,6 +330,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-4.1-nano": {
         "name": "GPT-4.1 Nano",
         "family": "gpt-4.1",
+        "provider": "openai",
         "context_window": 1_048_000,
         "max_output_tokens": 32_000,
         "pricing": ModelPricing(
@@ -332,6 +350,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "o4-mini": {
         "name": "o4-mini",
         "family": "o4",
+        "provider": "openai",
         "context_window": 200_000,
         "max_output_tokens": 100_000,
         "pricing": ModelPricing(
@@ -351,6 +370,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "o3": {
         "name": "o3",
         "family": "o3",
+        "provider": "openai",
         "context_window": 200_000,
         "max_output_tokens": 100_000,
         "pricing": ModelPricing(
@@ -369,6 +389,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "o3-mini": {
         "name": "o3-mini",
         "family": "o3",
+        "provider": "openai",
         "context_window": 200_000,
         "max_output_tokens": 100_000,
         "pricing": ModelPricing(
@@ -387,6 +408,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "o3-pro": {
         "name": "o3-pro",
         "family": "o3",
+        "provider": "openai",
         "context_window": 200_000,
         "max_output_tokens": 100_000,
         "pricing": ModelPricing(
@@ -404,6 +426,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "o1": {
         "name": "o1",
         "family": "o1",
+        "provider": "openai",
         "context_window": 200_000,
         "max_output_tokens": 100_000,
         "pricing": ModelPricing(
@@ -422,6 +445,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "o1-pro": {
         "name": "o1-pro",
         "family": "o1",
+        "provider": "openai",
         "context_window": 200_000,
         "max_output_tokens": 100_000,
         "pricing": ModelPricing(
@@ -440,6 +464,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-4o": {
         "name": "GPT-4o",
         "family": "gpt-4o",
+        "provider": "openai",
         "context_window": 128_000,
         "max_output_tokens": 16_000,
         "pricing": ModelPricing(
@@ -458,6 +483,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-4o-mini": {
         "name": "GPT-4o Mini",
         "family": "gpt-4o",
+        "provider": "openai",
         "context_window": 128_000,
         "max_output_tokens": 16_000,
         "pricing": ModelPricing(
@@ -477,6 +503,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-oss-120b": {
         "name": "GPT-OSS 120B",
         "family": "gpt-oss",
+        "provider": "openai",
         "context_window": 131_000,
         "pricing": ModelPricing(
             input_price_per_1m=0.039,
@@ -489,6 +516,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-oss-20b": {
         "name": "GPT-OSS 20B",
         "family": "gpt-oss",
+        "provider": "openai",
         "context_window": 131_000,
         "pricing": ModelPricing(
             input_price_per_1m=0.03,
@@ -502,6 +530,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-4-turbo": {
         "name": "GPT-4 Turbo",
         "family": "gpt-4",
+        "provider": "openai",
         "context_window": 128_000,
         "max_output_tokens": 4_000,
         "pricing": ModelPricing(
@@ -519,6 +548,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-4": {
         "name": "GPT-4",
         "family": "gpt-4",
+        "provider": "openai",
         "context_window": 8_000,
         "max_output_tokens": 8_000,
         "pricing": ModelPricing(
@@ -534,6 +564,7 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
     "gpt-3.5-turbo": {
         "name": "GPT-3.5 Turbo",
         "family": "gpt-3.5",
+        "provider": "openai",
         "context_window": 16_000,
         "max_output_tokens": 4_000,
         "deprecated": True,
@@ -542,6 +573,239 @@ KNOWN_MODELS: dict[str, dict[str, object]] = {
             output_price_per_1m=1.50,
         ),
         "capabilities": ModelCapabilities(
+            function_calling=True,
+            streaming=True,
+            json_mode=True,
+        ),
+    },
+    # Claude (Anthropic) models
+    "claude-opus-4-6": {
+        "name": "Claude Opus 4.6",
+        "family": "claude-opus",
+        "provider": "anthropic",
+        "context_window": 200_000,
+        "max_output_tokens": 32_000,
+        "pricing": ModelPricing(
+            input_price_per_1m=15.00,
+            output_price_per_1m=75.00,
+            cached_input_price_per_1m=1.50,
+        ),
+        "capabilities": ModelCapabilities(
+            vision=True,
+            reasoning=True,
+            function_calling=True,
+            structured_output=True,
+            streaming=True,
+            json_mode=True,
+        ),
+    },
+    "claude-sonnet-4-5-20250929": {
+        "name": "Claude Sonnet 4.5",
+        "family": "claude-sonnet",
+        "provider": "anthropic",
+        "context_window": 200_000,
+        "max_output_tokens": 16_000,
+        "pricing": ModelPricing(
+            input_price_per_1m=3.00,
+            output_price_per_1m=15.00,
+            cached_input_price_per_1m=0.30,
+        ),
+        "capabilities": ModelCapabilities(
+            vision=True,
+            reasoning=True,
+            function_calling=True,
+            structured_output=True,
+            streaming=True,
+            json_mode=True,
+        ),
+    },
+    "claude-haiku-4-5-20251001": {
+        "name": "Claude Haiku 4.5",
+        "family": "claude-haiku",
+        "provider": "anthropic",
+        "context_window": 200_000,
+        "max_output_tokens": 8_192,
+        "pricing": ModelPricing(
+            input_price_per_1m=0.80,
+            output_price_per_1m=4.00,
+            cached_input_price_per_1m=0.08,
+        ),
+        "capabilities": ModelCapabilities(
+            vision=True,
+            function_calling=True,
+            structured_output=True,
+            streaming=True,
+            json_mode=True,
+        ),
+    },
+    "claude-sonnet-4-20250514": {
+        "name": "Claude Sonnet 4",
+        "family": "claude-sonnet",
+        "provider": "anthropic",
+        "context_window": 200_000,
+        "max_output_tokens": 16_000,
+        "pricing": ModelPricing(
+            input_price_per_1m=3.00,
+            output_price_per_1m=15.00,
+            cached_input_price_per_1m=0.30,
+        ),
+        "capabilities": ModelCapabilities(
+            vision=True,
+            function_calling=True,
+            structured_output=True,
+            streaming=True,
+            json_mode=True,
+        ),
+    },
+    "claude-3-5-haiku-20241022": {
+        "name": "Claude 3.5 Haiku",
+        "family": "claude-haiku",
+        "provider": "anthropic",
+        "context_window": 200_000,
+        "max_output_tokens": 8_192,
+        "pricing": ModelPricing(
+            input_price_per_1m=0.80,
+            output_price_per_1m=4.00,
+            cached_input_price_per_1m=0.08,
+        ),
+        "capabilities": ModelCapabilities(
+            vision=True,
+            function_calling=True,
+            structured_output=True,
+            streaming=True,
+            json_mode=True,
+        ),
+    },
+    "claude-3-5-sonnet-20241022": {
+        "name": "Claude 3.5 Sonnet",
+        "family": "claude-sonnet",
+        "provider": "anthropic",
+        "context_window": 200_000,
+        "max_output_tokens": 8_192,
+        "pricing": ModelPricing(
+            input_price_per_1m=3.00,
+            output_price_per_1m=15.00,
+            cached_input_price_per_1m=0.30,
+        ),
+        "capabilities": ModelCapabilities(
+            vision=True,
+            function_calling=True,
+            structured_output=True,
+            streaming=True,
+            json_mode=True,
+        ),
+    },
+    "claude-3-opus-20240229": {
+        "name": "Claude 3 Opus",
+        "family": "claude-opus",
+        "provider": "anthropic",
+        "context_window": 200_000,
+        "max_output_tokens": 4_096,
+        "pricing": ModelPricing(
+            input_price_per_1m=15.00,
+            output_price_per_1m=75.00,
+            cached_input_price_per_1m=1.50,
+        ),
+        "capabilities": ModelCapabilities(
+            vision=True,
+            function_calling=True,
+            structured_output=True,
+            streaming=True,
+            json_mode=True,
+        ),
+    },
+    # Gemini (Google) models
+    "gemini-2.5-pro": {
+        "name": "Gemini 2.5 Pro",
+        "family": "gemini-2.5",
+        "provider": "google",
+        "context_window": 1_048_576,
+        "max_output_tokens": 65_536,
+        "pricing": ModelPricing(
+            input_price_per_1m=1.25,
+            output_price_per_1m=10.00,
+            cached_input_price_per_1m=0.3125,
+        ),
+        "capabilities": ModelCapabilities(
+            vision=True,
+            reasoning=True,
+            function_calling=True,
+            structured_output=True,
+            streaming=True,
+            json_mode=True,
+        ),
+    },
+    "gemini-2.5-flash": {
+        "name": "Gemini 2.5 Flash",
+        "family": "gemini-2.5",
+        "provider": "google",
+        "context_window": 1_048_576,
+        "max_output_tokens": 65_536,
+        "pricing": ModelPricing(
+            input_price_per_1m=0.15,
+            output_price_per_1m=0.60,
+            cached_input_price_per_1m=0.0375,
+        ),
+        "capabilities": ModelCapabilities(
+            vision=True,
+            reasoning=True,
+            function_calling=True,
+            structured_output=True,
+            streaming=True,
+            json_mode=True,
+        ),
+    },
+    "gemini-2.5-flash-lite": {
+        "name": "Gemini 2.5 Flash-Lite",
+        "family": "gemini-2.5",
+        "provider": "google",
+        "context_window": 1_048_576,
+        "max_output_tokens": 65_536,
+        "pricing": ModelPricing(
+            input_price_per_1m=0.075,
+            output_price_per_1m=0.30,
+            cached_input_price_per_1m=0.01875,
+        ),
+        "capabilities": ModelCapabilities(
+            vision=True,
+            function_calling=True,
+            structured_output=True,
+            streaming=True,
+            json_mode=True,
+        ),
+    },
+    "gemini-2.0-flash": {
+        "name": "Gemini 2.0 Flash",
+        "family": "gemini-2.0",
+        "provider": "google",
+        "context_window": 1_048_576,
+        "max_output_tokens": 8_192,
+        "pricing": ModelPricing(
+            input_price_per_1m=0.10,
+            output_price_per_1m=0.40,
+            cached_input_price_per_1m=0.025,
+        ),
+        "capabilities": ModelCapabilities(
+            vision=True,
+            function_calling=True,
+            structured_output=True,
+            streaming=True,
+            json_mode=True,
+        ),
+    },
+    "gemini-2.0-flash-lite": {
+        "name": "Gemini 2.0 Flash-Lite",
+        "family": "gemini-2.0",
+        "provider": "google",
+        "context_window": 1_048_576,
+        "max_output_tokens": 8_192,
+        "pricing": ModelPricing(
+            input_price_per_1m=0.075,
+            output_price_per_1m=0.30,
+            cached_input_price_per_1m=0.01875,
+        ),
+        "capabilities": ModelCapabilities(
+            vision=True,
             function_calling=True,
             streaming=True,
             json_mode=True,
@@ -568,6 +832,27 @@ _FAMILY_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"^whisper"), "whisper"),
     (re.compile(r"^text-embedding"), "text-embedding"),
     (re.compile(r"^text-moderation"), "text-moderation"),
+    # Claude family patterns
+    (re.compile(r"^claude-opus"), "claude-opus"),
+    (re.compile(r"^claude-sonnet"), "claude-sonnet"),
+    (re.compile(r"^claude-haiku"), "claude-haiku"),
+    (re.compile(r"^claude-3-5-sonnet"), "claude-sonnet"),
+    (re.compile(r"^claude-3-5-haiku"), "claude-haiku"),
+    (re.compile(r"^claude-3-opus"), "claude-opus"),
+    (re.compile(r"^claude-3-sonnet"), "claude-sonnet"),
+    (re.compile(r"^claude-3-haiku"), "claude-haiku"),
+    (re.compile(r"^claude"), "claude"),
+    # Gemini family patterns
+    (re.compile(r"^gemini-2\.5"), "gemini-2.5"),
+    (re.compile(r"^gemini-2\.0"), "gemini-2.0"),
+    (re.compile(r"^gemini-1\.5"), "gemini-1.5"),
+    (re.compile(r"^gemini"), "gemini"),
+]
+
+# Provider inference from model ID
+_PROVIDER_PATTERNS: list[tuple[re.Pattern[str], str]] = [
+    (re.compile(r"^claude"), "anthropic"),
+    (re.compile(r"^gemini"), "google"),
 ]
 
 
@@ -577,6 +862,14 @@ def infer_family(model_id: str) -> str:
         if pattern.search(model_id):
             return family
     return ""
+
+
+def infer_provider(model_id: str) -> str:
+    """Infer the provider from a model ID using regex patterns."""
+    for pattern, provider in _PROVIDER_PATTERNS:
+        if pattern.search(model_id):
+            return provider
+    return "openai"
 
 
 def get_known_model(model_id: str) -> OpenAIModel | None:
@@ -594,6 +887,7 @@ def get_known_model(model_id: str) -> OpenAIModel | None:
         id=model_id,
         name=str(data.get("name", model_id)),
         family=str(data.get("family", infer_family(model_id))),
+        provider=str(data.get("provider", infer_provider(model_id))),
         description=str(data.get("description", "")),
         context_window=int(str(ctx)) if ctx is not None else None,
         max_output_tokens=int(str(max_out)) if max_out is not None else None,
