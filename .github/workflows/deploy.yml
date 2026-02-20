@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  SERVICE_NAME: openai-model-api
+  SERVICE_NAME: llm-catalog-api
   REGION: us-central1
 
 jobs:
