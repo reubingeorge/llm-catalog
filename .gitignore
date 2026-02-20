@@ -26,8 +26,13 @@ data/
 
 # Testing
 .pytest_cache/
+.coverage
 coverage.xml
 htmlcov/
+
+# Credentials
+key.json
+*.pem
 
 # IDE
 .vscode/

@@ -1,4 +1,4 @@
-# OpenAI Model Catalog API
+# LLM Catalog API
 
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
@@ -6,21 +6,21 @@
 [![Ruff](https://img.shields.io/badge/linting-ruff-261230.svg?logo=ruff&logoColor=white)](https://docs.astral.sh/ruff/)
 [![mypy](https://img.shields.io/badge/type--checked-mypy-blue.svg)](https://mypy-lang.org/)
 [![pytest](https://img.shields.io/badge/tests-pytest-0A9EDC.svg?logo=pytest&logoColor=white)](https://docs.pytest.org)
-[![Coverage](https://img.shields.io/badge/coverage-86%25-brightgreen.svg)](.)
+[![Coverage](https://img.shields.io/badge/coverage-81%25-brightgreen.svg)](.)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
 [![Docker](https://img.shields.io/badge/docker-ready-2496ED.svg?logo=docker&logoColor=white)](Dockerfile)
 [![uv](https://img.shields.io/badge/uv-package%20manager-blueviolet.svg)](https://docs.astral.sh/uv/)
 
-Production-ready REST API that scrapes OpenAI's model information and serves it with rich filtering, sorting, and search.
+Multi-provider REST API that catalogs LLM models from **OpenAI**, **Anthropic (Claude)**, and **Google (Gemini)** with rich filtering, sorting, and search.
 
 ## Features
 
-- Scrapes model data from OpenAI API, docs pages, and pricing pages
+- **Multi-provider**: Scrapes and serves models from OpenAI, Anthropic, and Google
 - Copy-on-write store for lock-free reads (sub-10ms p99 latency)
 - ETag-based conditional responses (304 Not Modified)
-- Rich filtering: vision, reasoning, function_calling, family, price, context window
+- Rich filtering: provider, vision, reasoning, function_calling, family, price, context window
 - Sorting by price, context window, name, or creation date
-- Free-text search across model IDs and names
+- Free-text search across model IDs, names, and providers
 - Auto-refresh on configurable interval
 - SQLite persistence for crash recovery
 - orjson serialization (3-10x faster than stdlib json)
@@ -33,9 +33,9 @@ Production-ready REST API that scrapes OpenAI's model information and serves it 
 # Install dependencies
 uv sync --dev
 
-# Create .env from example
+# Create .env from example (optional for local dev)
 cp .env.example .env
-# Edit .env and add your OPENAI_API_KEY
+# Edit .env and add your API keys
 
 # Run dev server
 uv run uvicorn openai_models.app:create_app --factory --reload --port 8000
@@ -45,7 +45,7 @@ uv run uvicorn openai_models.app:create_app --factory --reload --port 8000
 
 ```bash
 cp .env.example .env
-# Edit .env and add your OPENAI_API_KEY
+# Edit .env and add your API keys
 docker compose up --build
 ```
 
@@ -58,11 +58,23 @@ The API will be available at `http://localhost:8000`.
 List models with filtering, sorting, and search.
 
 ```bash
-# All non-deprecated models
+# All non-deprecated models (all providers)
 curl http://localhost:8000/models
 
-# Vision + reasoning models
+# Only OpenAI models
+curl "http://localhost:8000/models?provider=openai"
+
+# Only Anthropic (Claude) models
+curl "http://localhost:8000/models?provider=anthropic"
+
+# Only Google (Gemini) models
+curl "http://localhost:8000/models?provider=google"
+
+# Vision + reasoning models across all providers
 curl "http://localhost:8000/models?vision=true&reasoning=true"
+
+# Claude models with vision support
+curl "http://localhost:8000/models?provider=anthropic&vision=true"
 
 # GPT-5 family, sorted by input price
 curl "http://localhost:8000/models?family=gpt-5&sort=input_price&order=asc"
@@ -84,25 +96,28 @@ curl "http://localhost:8000/models?include_deprecated=true"
 
 | Param | Type | Description |
 |---|---|---|
+| `provider` | string | Filter by provider: `openai`, `anthropic`, `google` |
 | `vision` | bool | Vision/image input support |
 | `reasoning` | bool | Reasoning capability |
 | `function_calling` | bool | Function calling support |
 | `structured_output` | bool | Structured output support |
 | `streaming` | bool | Streaming support |
 | `fine_tuning` | bool | Fine-tuning available |
-| `family` | string | Model family (e.g., `gpt-5.2`, `o3`) |
+| `family` | string | Model family (e.g., `gpt-5.2`, `claude-sonnet`, `gemini-2.5`) |
 | `include_deprecated` | bool | Include deprecated models (default: false) |
 | `min_context` | int | Minimum context window |
 | `max_input_price` | float | Max input price per 1M tokens |
 | `max_output_price` | float | Max output price per 1M tokens |
 | `sort` | enum | `name`, `input_price`, `output_price`, `context_window`, `created` |
 | `order` | enum | `asc` or `desc` |
-| `q` | string | Free-text search |
+| `q` | string | Free-text search (matches id, name, and provider) |
 
 ### `GET /models/{model_id}`
 
 ```bash
 curl http://localhost:8000/models/gpt-5.2
+curl http://localhost:8000/models/claude-sonnet-4-5-20250929
+curl http://localhost:8000/models/gemini-2.5-pro
 ```
 
 ### `POST /refresh`
@@ -121,13 +136,17 @@ curl http://localhost:8000/health
 
 | Variable | Default | Description |
 |---|---|---|
-| `OPENAI_API_KEY` | *(required)* | API key for /v1/models |
+| `OPENAI_API_KEY` | *(optional)* | OpenAI API key |
+| `ANTHROPIC_API_KEY` | *(optional)* | Anthropic API key |
+| `GEMINI_API_KEY` | *(optional)* | Google Gemini API key |
 | `APP_ENV` | `production` | `development` / `production` / `testing` |
 | `APP_PORT` | `8000` | Bind port |
 | `LOG_LEVEL` | `info` | Logging level |
 | `REFRESH_INTERVAL_MINUTES` | `60` | Auto-refresh interval (0 = disabled) |
 | `HTTP_TIMEOUT` | `30` | Outbound request timeout (seconds) |
 | `DB_PATH` | `data/models.db` | SQLite path (empty = in-memory only) |
+
+All API keys are optional. If a key is missing, that provider's live API is skipped and models are served from hardcoded fallback data.
 
 ## Development
 
@@ -147,8 +166,8 @@ uv run pytest
 
 ## Architecture
 
-- **Copy-on-write store**: Reads never lock. Writers build a new immutable snapshot and atomically swap the reference pointer.
-- **Scraping pipeline**: API endpoint -> docs pages -> pricing page -> hardcoded fallback. Each source enriches the previous.
+- **Multi-provider scraping**: OpenAI, Anthropic, and Gemini scrapers run concurrently. Each provider follows the same merge priority: API response > scraped pricing/docs > hardcoded fallback.
+- **Copy-on-write store**: Reads never lock. Writers build a new immutable snapshot and atomically swap the reference pointer. Pre-computed indexes by family and provider.
 - **orjson + ORJSONResponse**: All JSON serialization uses orjson for 3-10x speedup.
 - **uvloop**: 2-4x faster event loop for async I/O.
 - **ETag caching**: Repeat clients get 304 responses, skipping serialization entirely.
